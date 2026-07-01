@@ -14,7 +14,7 @@ Our objective goes beyond migrating the algorithm to Python. Based on the CPEL m
 Clone the repository and install the dependencies:
 
 ```bash
-git clone [https://github.com/hhllee9/CPELmHap.git](https://github.com/YourUsername/CPELmHap.git)
+git clone [https://github.com/hhllee9/CPELmHap.git](https://github.com/hhllee9/CPELmHap.git)
 cd CPELmHap
 
 # Install dependencies
