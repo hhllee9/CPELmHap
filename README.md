@@ -46,6 +46,7 @@ start=10469
 end = 11468
 random.seed(42)
 np.random.seed(42)
+
 # 3. Run parameter estimation
 n_list, theta, _ = F._cal_cpel(cpg_sites_file, data, chr=chrom, start=start, end=end, step=250, compress=False, vis=False)
 print((n_list, theta))
