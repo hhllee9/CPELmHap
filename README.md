@@ -48,7 +48,7 @@ random.seed(42)
 np.random.seed(42)
 
 # 3. Run parameter estimation
-n_list, theta, _ = F._cal_cpel(cpg_sites_file, data, chr=chrom, start=start, end=end, step=250, compress=False, vis=False)
+n_list, theta, _ = F._cal_cpel(cpg_sites_file, data, chr=chr1, start=start, end=end, step=250, compress=False, vis=False)
 print((n_list, theta))
 
 ```
@@ -74,7 +74,7 @@ The resulting empirical cumulative distributions for different statistics are vi
 <img src="images\unmat_m5_n4_theta1_0.5_0.5_theta2_0.5_0.5_pvals.png" width="1024">
 ## Relationship Between Statistics and Model Parameters
 In this module, we generate heatmaps to visually demonstrate the relationship between the underlying CPEL model parameters ($\alpha$, $\beta$) and the various methylation statistics.
-## Relationship Between Statistics and Model Parameters
+
 
 <p align="center">
   <img src="images/PDR.png" alt="PDR" width="30%">
