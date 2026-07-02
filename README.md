@@ -1,7 +1,7 @@
-# CPELmHap: A Python Package for DNA Methylation Haplotypes Analysis via the CPEL Model
+# mHapCPEL: A Python Package for DNA Methylation Haplotypes Analysis via the CPEL Model
 
 ## Introduction
-CPELmHap is a comprehensive Python toolkit designed for modeling DNA methylation haplotype data. This package builds upon the Julia package [CpelTdm.jl](https://github.com/jordiabante/CpelTdm.jl) and its underlying CPEL method [1].
+mHapCPEL is a comprehensive Python toolkit designed for modeling DNA methylation haplotype data. This package builds upon the Julia package [CpelTdm.jl](https://github.com/jordiabante/CpelTdm.jl) and its underlying CPEL method.
 
 Our objective goes beyond migrating the algorithm to Python. Based on the CPEL model, we have expanded the statistical metrics beyond the traditional Mean Methylation Level (MML) and Normalized Methylation Entropy (NME). In addition to performing differential analysis, this tool utilizes simulations to investigate the dynamic relationship between model parameters and these statistical metrics.
 
@@ -65,17 +65,32 @@ We provide a standalone module to run Monte Carlo simulations to validate the pe
 ```
 Bash
 # Usage: python Simulations.py <test_type: unmat/mat> <m_samples> <n_cpgs> <theta1> <theta2>
-# Example: Unpaired test, 5 samples per group, 4 CpGs, comparing theta1=[0.5,0.5] and theta2=[0.5,0.5]
+# Example1: Unpaired test, 5 samples per group, 4 CpGs, comparing theta1=[0.5,0.5] and theta2=[0.5,0.5]
 
 python Simulations.py unmat 5 4 0.5,0.5 0.5,0.5
+
+# Example2: Unpaired test, 5 samples per group, 4 CpGs, comparing theta1=[0.5,0.5] and theta2=[-0.5,0.5]
+
+python Simulations.py unmat 5 4 0.5,0.5 -0.5,0.5
 
 ```
 The resulting empirical cumulative distributions for different statistics are visualized below:
 <img src="images\unmat_m5_n4_theta1_0.5_0.5_theta2_0.5_0.5_pvals.png" width="1024">
+<img src="images\unmat_m5_n4_theta1_0.5_0.5_theta2_-0.5_0.5_pvals.png" width="1024">
+
 ## Relationship Between Statistics and Model Parameters
-In this module, we generate heatmaps to visually demonstrate the relationship between the underlying CPEL model parameters ($\alpha$, $\beta$) and the various methylation statistics.
+In this module, we generate heatmaps to visually demonstrate the relationship between the underlying CPEL model parameters ($\alpha$, $\beta$) and the various methylation statistics.By exploring this parameter grid ($\alpha, \beta \in [-8, 8]$), researchers can comprehensively understand how spatial concordance and methylation levels independently or synergistically drive different metrics (MML, NME, PDR, CHALM, and MCR).
 
+### Reproducing the Analysis
 
+```bash
+# Step 1: Compute the metrics matrix over the parameter grid 
+# (This caches the results into 'plots/computed_metrics.npz')
+python Stat_para/Statistics_Parameters.py
+
+# Step 2: Render and export the heatmaps (generates both individual and combined plots)
+python Stat_para/plot.py
+```
 <p align="center">
   <img src="images/PDR.png" alt="PDR" width="30%">
   <img src="images/CHALM.png" alt="CHALM" width="30%">
@@ -87,5 +102,4 @@ In this module, we generate heatmaps to visually demonstrate the relationship be
 </p>
 
 ## References
-[1]  Abante, J. and J. Goutsias, CpelTdm.jl: a Julia package for targeted differential DNA methylation analysis. bioRxiv, 2020: p. 2020.10.17.343020.
-[2]	Hong, Y., et al., mHapBrowser: a comprehensive database for visualization and analysis of DNA methylation haplotypes, in Nucleic Acids Res. 2024: England. p. D929–D937.
+[1]  Henghui Li#, Jinglin Qi#, Rui Hou#, Leiqin Liu, Yaochen Xu, Xuejie Jin, Hongcang Gu*, Xiaoqi Zheng* and Jiantao Shi* Unified quantification of DNA methylation haplotype metrics under a discrete probability distribution model (submitted)
